@@ -1,0 +1,243 @@
+/*Add your CSS rules*/
+
+/*Some selectors you may need include are
+a.skip, header, .nav_links, .container,
+.intro, html, .text-block, etc.*/
+
+
+/* 4. skip to content*/
+body{
+    position:relative;
+}
+.skip{
+    position: absolute;
+    top: -40px;
+}
+.skip:focus{
+    top: 0px;
+}
+
+/*5. header: nav and logo*/
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*6. header: nav and logo*/
+.nav_links{
+    display: flex;
+    flex-direction: column;
+}
+/*7. links in navigation*/
+.nav_links a:hover, a:focus{
+    color: #50C7C7;
+    border-bottom: #50C7C7 1px dotted;
+}
+/*8. list items in navigation*/
+.nav_links li{
+    padding-bottom: 5px;
+}
+/*9. logo animation*/
+#logo{
+    animation: expand 1s;
+}
+@keyframes expand{
+    from{width:0 ;}
+    to{width: 50px ;}
+}
+/*@keyframes expand{
+    from{transform: scaleX(0);}
+    to{transform: scaleX(50px) ;}
+}*/
+
+/*10. contianer: display grid*/
+.container{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: repeat(5, auto);
+    grid-row-gap: 15px;
+    /*box-sizing: border-box;*/
+}
+
+/*11. intro element*/
+.intro{
+    /*position: relative;*/
+    grid-column: 1/-1;
+    grid-row: 1;
+    color: #fff;
+    background: url(../images/header.jpg) no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 400px;
+}
+/*12. paragraphs in intro element*/
+.intro p{
+    padding:100px 0 100px 0;
+}
+
+
+/*13. image columns*/
+.about-image, .method-image, .clients-image, .contact-image{
+    grid-column: 1 / span 3;
+    max-height: 700px;
+    overflow: hidden;
+
+}
+/*14. text columns*/
+.about, .method, .clients, .contact{
+    grid-column: 2 / span 1;
+}
+
+/*15. overlap elements: rows*/
+.about-image, .about{
+    grid-row: 2;
+}
+.method-image, .method{
+    grid-row: 3;
+}
+.clients-image, .clients{
+    grid-row: 4;
+}
+.contact-image, .contact{
+    grid-row: 5;
+}
+/*16. text-block*/
+.text-block{
+    align-self: center;
+}
+/*17. footer link: white text*/
+footer a{
+    color: #fff;
+}
+
+
+/*tablets*/
+@media screen and (min-width: 750px){
+    /*18. nav_links */
+    .nav_links{
+    flex-direction: row;  
+    justify-content: center;
+    }
+    /*19. links in nav: padding 10px*/
+    .nav_links a{
+    padding: 10px;
+    }
+    /*20. container*/
+    .container{
+        grid-template-columns: 50px auto 500px auto 50px;
+        grid-template-rows: 400px;
+    }
+    /*21. columns*/
+    .about, .clients, .method-image, .contact-image{
+        grid-column: 3/5;
+    }
+    /*22. columns*/
+    .about-image, .clients-image, .method, .contact{
+        grid-column: 2/4;
+    }
+
+}
+
+/*desktops*/
+
+@media screen and (min-width: 1125px){
+    /*23. nav bar and logo position*/
+    header{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    /*24. logo animation*/
+    #logo{
+        animation: move 1s, large 1s; 
+    }
+    @keyframes large{
+        0%{width: 50px }
+        50%{width: 150px}
+        100%{ width: 50px}
+    }
+    @keyframes move{
+        0%{left: 0px }
+        50%{ left: 450px }  
+        100%{ left: 0px }
+    }
+     /*@keyframes move {
+        from{transform:  translateX(0) scaleX(1);}
+        to{ transform: translateX(450px) scaleX(3);}  
+    }*/
+
+    /*25-28. container*/
+    .contact-image, .method-image{
+        display: none;
+    }
+    .container{
+        grid-template-columns: 15px 75px 1fr 25px 1fr 75px 15px;
+        grid-template-rows: 3 400px;
+    }
+   
+    .about-image, .clients-image{
+        grid-column: 2 / span 5;
+    }
+    .about, .clients{
+        grid-column: 3/4
+    }
+    .method, .contact{
+        grid-column: 5/6;
+    }
+    .about , .method, .about-image{
+        grid-row: 2;
+    }
+    .clients, .contact, .clients-image{
+        grid-row: 3;
+    }
+}
+
+/*prefers-reduced-motion*/
+@media (prefers-reduced-motion){
+    /*29. logo*/
+    #logo{
+        animation: none;
+    }
+    /*30. Skip to content*/
+    .skip:focus{
+        transition: none;
+    }
+    /*31.jump to different sections*/
+    html{
+        scroll-behavior: auto;
+    }
+    /*32. disable parallax image*/
+    .intro {
+       background-attachment: inherit;
+     }
+    
+}
+
+/*print*/
+@media print{
+    /*33. images are removed*/
+    .intro{
+        background-image: none;
+    }
+    .about-image, .method-image, .clients-image, .contact-image{
+        display: none;
+    }
+    /*34. nav element*/
+    nav{
+        width: 100%;
+    }
+    .nav_links{
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    /*35. height*/
+    .text-block{
+        min-height: initial;
+    }
+    .intro{
+        height: initial;
+    }
+    .container{
+        grid-template-rows: initial;
+    }
+
+}
